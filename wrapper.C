@@ -1013,7 +1013,12 @@ int main(int argc, char** argv)
                 kill(getpid(), signal_number); // suicide by imitation
                 // this code should be unreachable
                 // just in case, fall back calling boinc_finish
-                boinc_finish(signal_number);
+                boinc_finish(EXIT_CHILD_FAILED);
+            }
+            else
+            {
+                std::cerr << "LLR exited for unknown reason" << std::endl;
+                boinc_finish(EXIT_CHILD_FAILED);
             }
 #endif
             break;
